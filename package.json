@@ -9,6 +9,7 @@
     "chrome-har": "0.9.1",
     "chrome-trace": "0.2.1",
     "dayjs": "1.7.8",
+    "del": "^4.1.0",
     "execa": "1.0.0",
     "fast-stats": "0.0.4",
     "hasbin": "1.2.3",
