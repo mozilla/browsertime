@@ -1309,22 +1309,22 @@ def calculate_visual_metrics(histograms_file, start, end, perceptual, contentful
             f.close()
         if len(histograms) > 1:
             metrics = [
-                {'name': 'First Visual Change',
+                {'name': 'first Visual Change',
                     'value': histograms[1]['time']},
-                {'name': 'Last Visual Change',
+                {'name': 'last Visual Change',
                     'value': histograms[-1]['time']},
-                {'name': 'Speed Index',
+                {'name': 'speed Index',
                  'value': calculate_speed_index(progress)}
             ]
             if perceptual:
                 value, value_progress = calculate_perceptual_speed_index(progress, dirs)
                 metrics.extend((
                         {
-                            'name': 'Perceptual Speed Index',
+                            'name': 'perceptual Speed Index',
                             'value': value
                         },
                         {
-                            'name': 'Perceptual Speed Index Progress',
+                            'name': 'perceptual Speed Index Progress',
                             'value': value_progress
                         }))
             if contentful:
@@ -1332,11 +1332,11 @@ def calculate_visual_metrics(histograms_file, start, end, perceptual, contentful
 
                 metrics.extend((
                         {
-                            'name': 'Contentful Speed Index',
+                            'name': 'contentful Speed Index',
                             'value': value
                         },
                         {
-                            'name': 'Contentful Speed Index Progress',
+                            'name': 'contentful Speed Index Progress',
                             'value': value_progress
                         }))
             if hero_elements_file is not None and os.path.isfile(hero_elements_file):
@@ -1372,22 +1372,22 @@ def calculate_visual_metrics(histograms_file, start, end, perceptual, contentful
                 logging.warn('Hero elements file is not valid: ' + str(hero_elements_file))
         else:
             metrics = [
-                {'name': 'First Visual Change',
+                {'name': 'first Visual Change',
                     'value': histograms[0]['time']},
-                {'name': 'Last Visual Change', 'value': histograms[0]['time']},
-                {'name': 'Visually Complete', 'value': histograms[0]['time']},
-                {'name': 'Speed Index', 'value': 0}
+                {'name': 'last Visual Change', 'value': histograms[0]['time']},
+                {'name': 'visually Complete', 'value': histograms[0]['time']},
+                {'name': 'speed Index', 'value': 0}
             ]
             if perceptual:
-                metrics.append({'name': 'Perceptual Speed Index', 'value': 0})
+                metrics.append({'name': 'perceptual Speed Index', 'value': 0})
             if contentful:
-                metrics.append({'name': 'Contentful Speed Index', 'value': 0})
+                metrics.append({'name': 'contentful Speed Index', 'value': 0})
         prog = ''
         for p in progress:
             if len(prog):
                 prog += ", "
             prog += '{0:d}={1:d}'.format(p['time'], int(p['progress']))
-        metrics.append({'name': 'Visual Progress', 'value': prog})
+        metrics.append({'name': 'visual Progress', 'value': prog})
 
     return metrics
 
