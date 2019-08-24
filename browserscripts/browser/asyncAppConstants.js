@@ -1,6 +1,7 @@
 module.exports = {
   requires: { privilege: true },
-  function: async function() {
+  pre: function() {},
+  collect: async function() {
     return new Promise(resolve => {
       const { AppConstants } = ChromeUtils.import(
         'resource://gre/modules/AppConstants.jsm'
