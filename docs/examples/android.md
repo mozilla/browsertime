@@ -39,7 +39,7 @@ configure the browser vehicle.
 - Use `firefox.android.intentArgument` to configure how the Android
   intent is launched.
 - Prefer `firefox.android.intentArgument=...`, especially with
-  arguments starting with hyphens, to avoid a Browsertime-parsing
+  arguments starting with hyphens, to avoid a browsertime-parsing
   issue where the `--...` will be interpreted as an argument to
   browsertime itself.
 - Passed through to `adb shell am start ...` follow the format at
