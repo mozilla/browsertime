@@ -2,7 +2,7 @@ Android Examples
 ================
 
 This page will give a few examples to get you up and running with
-Browsertime on Android devices.  Generally, add `--android` and then
+browsertime on Android devices.  Generally, add `--android` and then
 configure the browser vehicle.
 
 `browsertime --android https://www.sitespeed.io`
@@ -41,7 +41,7 @@ configure the browser vehicle.
 - Prefer `firefox.android.intentArgument=...`, especially with
   arguments starting with hyphens, to avoid a Browsertime-parsing
   issue where the `--...` will be interpreted as an argument to
-  Browsertime itself.
+  browsertime itself.
 - Passed through to `adb shell am start ...` follow the format at
   [https://developer.android.com/studio/command-line/adb#IntentSpec](https://developer.android.com/studio/command-line/adb#IntentSpec).
 - To add multiple arguments, repeat `--firefox.android.intentArgument`
