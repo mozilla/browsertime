@@ -1,10 +1,8 @@
-FROM sitespeedio/webbrowsers:chrome-74-firefox-66.0.4
+FROM sitespeedio/webbrowsers:chrome-78.0-firefox-71.0
 
 ENV BROWSERTIME_XVFB true
 ENV BROWSERTIME_CONNECTIVITY__ENGINE external
 ENV BROWSERTIME_DOCKER true
-ENV BROWSERTIME_VIDEO true
-ENV BROWSERTIME_visualMetrics true
 
 COPY docker/webpagereplay/wpr /usr/local/bin/
 COPY docker/webpagereplay/wpr_cert.pem /webpagereplay/certs/
@@ -38,5 +36,9 @@ ADD docker/adb/insecure_shared_adbkey.pub /root/.android/adbkey.pub
 WORKDIR /browsertime
 
 COPY docker/scripts/start.sh /start.sh
+
+# Allow all users to run commands needed by sitespeedio/throttle via sudo
+# See https://github.com/sitespeedio/throttle/blob/master/lib/tc.js
+RUN echo 'ALL ALL=NOPASSWD: /usr/sbin/tc, /usr/sbin/route, /usr/sbin/ip' > /etc/sudoers.d/tc
 
 ENTRYPOINT ["/start.sh"]

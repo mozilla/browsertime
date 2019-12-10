@@ -1,15 +1,20 @@
 {
   "description": "Browsertime",
-  "version": "4.9.2-android",
+  "version": "7.6.1-android",
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "@sitespeed.io/throttle": "0.5.1",
-    "adbkit": "2.11.0",
-    "chrome-har": "0.9.1",
-    "dayjs": "1.8.13",
-    "del": "4.1.0",
-    "execa": "1.0.0",
+    "@sitespeed.io/throttle": "0.5.4",
+    "adbkit": "2.11.1",
+    "btoa": "1.2.1",
+    "@sitespeed.io/chromedriver": "78.0.3904-70",
+    "chrome-har": "0.11.4",
+    "chrome-remote-interface": "0.28.0",
+    "dayjs": "1.8.15",
+    "del": "4.1.1",
+    "execa": "2.0.4",
     "fast-stats": "0.0.5",
+    "find-up": "4.1.0",
+    "get-port": "5.0.0",
     "hasbin": "1.2.3",
     "intel": "1.2.0",
     "lodash.foreach": "4.5.0",
@@ -22,10 +27,13 @@
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
     "selenium-webdriver": "https://github.com/mozilla/selenium/archive/v3.6.0-android.tar.gz",
-    "tracium": "0.2.0",
     "valid-url": "1.0.9",
+    "sharp": "0.23.0",
+    "@sitespeed.io/geckodriver": "0.26.0",
+    "@sitespeed.io/tracium": "0.3.3",
+    "speedline-core": "1.4.2",
     "@cypress/xvfb": "1.2.4",
-    "yargs": "13.2.2"
+    "yargs": "14.2.0"
   },
   "optionalDependencies": {
     "@sitespeed.io/chromedriver": "74.0.372-9.6-1",
@@ -33,16 +41,15 @@
     "sharp": "0.22.1"
   },
   "devDependencies": {
-    "bluebird": "3.5.1",
-    "chai": "^4.1.2",
-    "chai-as-promised": "~7.1.1",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "longjohn": "^0.2.12",
-    "mocha": "^5.1.1",
-    "prettier": "^1.12.1",
-    "sequencediagrams": "0.0.8"
+    "bluebird": "3.5.5",
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
+    "eslint": "6.2.2",
+    "eslint-config-prettier": "6.1.0",
+    "eslint-plugin-prettier": "3.1.0",
+    "longjohn": "0.2.12",
+    "mocha": "6.2.0",
+    "prettier": "1.18.2"
   },
   "engines": {
     "node": ">=10.13.0"
@@ -71,8 +78,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
-    "travis": "npm run eslint-check && npm run lint && npm run test",
-    "generateDocs": "sequencediagrams docs/sequence-diagrams"
+    "travis": "npm run eslint-check && npm run lint && npm run test"
   },
   "name": "browsertime",
   "author": "Tobias Lidskog",

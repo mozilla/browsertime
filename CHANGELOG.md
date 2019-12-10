@@ -1,12 +1,328 @@
 # Browsertime changelog
+## 7.6.1 - 2019-12-10
+### Fixed
+* Disable password save popup in Chrome [#1022](https://github.com/sitespeedio/browsertime/pull/1022). When we removed the Browsertime extension for Chrome, the save popup was added again.
 
-## 5.0.0 - UNRELEASED
+## 7.6.0 - 2019-12-07
+### Added
+* Disable safe browsing per default for Firefox. Enable it with `--firefox.disableSafeBrowsing false`[#1029](https://github.com/sitespeedio/browsertime/pull/1019).
+* Disable traffic to detect portal for Firefox when you use `--firefox.mozillaProPreferences` [#1202](https://github.com/sitespeedio/browsertime/pull/1020).
+
+## 7.5.0 - 2019-12-06
+### Added
+* Added Firefox 71 in the Docker container.
+* Added Firefox preferences from the Mozilla Performance Team to get as stable metrics as possible. Enable it with `--firefox.mozillaProPreferences` [#1016](https://github.com/sitespeedio/browsertime/pull/1016).
+
+## 7.4.2 - 2019-12-05
+### Fixed
+* Fix so that your own metrics (added by `measure.add` live in the same namespace (extras) both per run and in the statistics [#1015](https://github.com/sitespeedio/browsertime/pull/1015).
+
+## 7.4.1 - 2019-12-04
+### Fixed
+* A better fix for handling Arabic characters in the URL [#1012](https://github.com/sitespeedio/browsertime/pull/1012).
+* Catch if Contentful Speed Index fails [#1014](https://github.com/sitespeedio/browsertime/pull/1014) 
+
+## 7.4.0 - 2019-12-04
+### Added
+* Added configurable settle time for the browser to rest after the browser is open and before the tests starts to run. Use `--timeToSettle` in ms [#1003](https://github.com/sitespeedio/browsertime/pull/1003).
+* Calculate FID instead of just report it [#1005](https://github.com/sitespeedio/browsertime/pull/1005)
+* You can now run ADB shell directly from your user script [#1007](https://github.com/sitespeedio/browsertime/pull/1007). Use `commands.android.shell('')`.
+* Add your own metrics from your script. The metrics will be in the result JSON and statistics will be calculated for that metric. Use `commands.measure.add(name, value)` or `commands.measure.addObject(object)` if you want to add multiple metrics. Documentation coming soon [#1011](https://github.com/sitespeedio/browsertime/pull/1011)
+
+### Fixed
+* Arabic characters didn't work in URLs, fixed in [#1009](https://github.com/sitespeedio/browsertime/pull/1009).
+* Remove and simplify old code when running with pageLoadStrategy none. Introducing `--pageCompleteCheckStartWait` - The time in ms to wait for running the page complete check for the first time. Use this when you have a pageLoadStrategy set to none. [#1008](https://github.com/sitespeedio/browsertime/pull/1008)
+* Better guards when calculating Visual Metrics [#1006](https://github.com/sitespeedio/browsertime/pull/1006).
+* Fix for the using the Window recorder in Firefox 72. Thank you [Barret Rennie](https://github.com/brennie) for the PR [#995](https://github.com/sitespeedio/browsertime/pull/995).
+
+## 7.3.0 - 2019-11-28
+### Added
+* Collect number of DOM elements as a part of the page info for each run [#1000](https://github.com/sitespeedio/browsertime/pull/1000).
+* Configure how often to check for the pageCompleteCheck. Default is every 200 ms, and it happens after the load event end (using the default pageLoadStrategy). Set it with `--pageCompleteCheckPollTimeout`(value in ms) [#998](https://github.com/sitespeedio/browsertime/pull/998).
+
+### Fixed
+* Added missing pageLoadStrategy option in the CLI. The option worked but no visible cli help for it [#1001](https://github.com/sitespeedio/browsertime/pull/1001).
+* Do not load the Browsertime WebExtention for Chrome (it is not used anymore) and make it possible for Firefox to disable to use it with `--firefox.disableBrowsertimeExtension`. 
+
+##  7.2.2 - 2019-11-22
+### Fixed
+* There was a bug introduced in 7.0.0 that made navigation fail on Safari [#997](https://github.com/sitespeedio/browsertime/pull/997).
+* NPM was broken for 7.2.1
+
+##  7.2.0 - 2019-11-22
+### Added
+* Get phone and Android version from the phone [#991](https://github.com/sitespeedio/browsertime/pull/991).
+
+### Fixed
+* Take care of the case when a page overwrites the document.URL [#992](https://github.com/sitespeedio/browsertime/pull/992).
+* Stop the video recording when the test finished and not after we collected all JavaScript metrics [#994](https://github.com/sitespeedio/browsertime/pull/994).
+
+## 7.1.0 -  2019-11-14
+### Added
+* Added Total Blocking Time (ttb) and maxPotentailFid in [#990](https://github.com/sitespeedio/browsertime/pull/990). This only works in Chrome at the moment, enable wiith `--cpu`.
+
+## 7.0.2 - 2019-11-13
+### Fixed
+* Use CDP to get Chrome name and version (instead of JS). This gives us the Chromee version used when running emulated mobile [#988](https://github.com/sitespeedio/browsertime/pull/988).
+* Add a HTML body of the first test page (that becomes orange) when we test with `--spa` [#987](https://github.com/sitespeedio/browsertime/pull/987).
+
+## 7.0.1 - 2019-11-07
+### Fixed
+* There was a bug how we handled data from postScript that made using axe in sitespeed.io in a script, testing multiple URLs fail. Fixed in [#985](https://github.com/sitespeedio/browsertime/pull/985)
+
+## 7.0.0 - 2019-11-02
 
 ### Changed
-* Replaced [Chrome-trace](https://github.com/sitespeedio/chrome-trace) with [Tracium](https://github.com/aslushnikov/tracium) in [#816](https://github.com/sitespeedio/browsertime/pull/816/).
+* Finally there's a fix for that the Docker container run Browsertime as root, generating otput owned by root as in [#1459](https://github.com/sitespeedio/sitespeed.io/issues/1459). The fix by [Mason Malone](https://github.com/MasonM) pickup the user of the output directory and uses that user. Thank you again [Mason Malone](https://github.com/MasonM) for the PR, originally in sitespeed.io [#2710](https://github.com/sitespeedio/sitespeed.io/pull/2710) and moved here [#964](https://github.com/sitespeedio/browsertime/pull/964).
+* Changed a couple of Firefox settings to follow the Mozilla teams downstream version [#965](https://github.com/sitespeedio/browsertime/pull/965).
+
+### Added
+* Added Contentful speed index is a new SI metric developed by Bas Schouten at Mozilla which uses edge detection to calculate the amount of "content" that is visible on each frame, thank you [dpalmeiro](https://github.com/dpalmeiro) for the PR [#976](https://github.com/sitespeedio/browsertime/pull/976).
+* Firefox 67 and above has a built-in window recorder ([bug 1536174](https://bugzilla.mozilla.org/show_bug.cgi?id=1536174)) that is able to dump PNG images of each frame that is painted to the window. This can be enabled and disabled in the browser console, or through the chrome context with selenium webdriver.
+This PR introduces a new privileged API that is able to execute JS in the chrome context, as well as support for generating a variable rate MP4 using the output images from the window recorder. The motivation for this work was to introduce a low-overhead video recorder that will not introduce performance disturbances during page loads. Thank you [dpalmeiro](https://github.com/dpalmeiro) for the PR [#978](https://github.com/sitespeedio/browsertime/pull/978). You can try it out with `--video --firefox.windowRecorder`
+* There's a new way to set variance on your connectivity. At the moment you can only do that when you are using Throttle as engine. You can try it out with `--connectivity.variance 2` - that means the latency will have a variance of 2% between runs. Let us try this out and get back about later on [#973](https://github.com/sitespeedio/browsertime/pull/973). Original idea from Emery Berger.
+* Chrome/Chromedriver 78 and Firefox 70.
+
+### Fixed
+* Some URLs failed because of that the document.title was an image, as reported in [#979](https://github.com/sitespeedio/browsertime/issues/979) and fixed in [#980](https://github.com/sitespeedio/browsertime/pull/980).
+* Hide sudo log when using Docker [#971](https://github.com/sitespeedio/browsertime/pull/971).
+* Better log message if the Browser fails to start, thank you [Mason Malone](https://github.com/MasonM) for the PR [#962](https://github.com/sitespeedio/browsertime/pull/962).
+* Make it possible to turn off video/visualMetrics using config json in Docker [#967](https://github.com/sitespeedio/browsertime/pull/967).
+
+
+## 6.1.4 - 2019-10-16
+### Fixed
+* Upgraded to Geckodriver 0.26.0.
+
+## 6.1.3 - 2019-10-07
+### Fixed
+* Upgraded to Yargs 14.2.0 that makes it possible to extend configurations in multiple steps (old version only supported one step and was broken for multiple steps).
+* TSProxy didn't work since last upgraded. Rollback to earlier TSProxy version in [#957](https://github.com/sitespeedio/browsertime/pull/957)
+
+## 6.1.2 - 2019-10-04
+### Fixed
+* Adding your own extension to Firefox was broken since 6.0 [#954](https://github.com/sitespeedio/browsertime/issues/954).
+
+## 6.1.1 - 2019-09-26
+### Fixed
+* If you are using SpeedLine with the trace to create VisualMetrics, metrics was strings instead of numbers in the result json [#951](https://github.com/sitespeedio/browsertime/pull/951).
+
+## 6.1.0 - 2019-09-25
+### Added
+* Get the first input in Chrome (useful for user journeys) [#948](https://github.com/sitespeedio/browsertime/pull/948).
+
+### Fixed
+* Removed settings for enabling LayoutInstabilityAPI in Chrome (is on by default in Chrome 77) [#949](https://github.com/sitespeedio/browsertime/pull/949).
+* Fixed a bug for Chrome when you couldn't send more that one request header [#950](https://github.com/sitespeedio/browsertime/pull/950).
+
+## 6.0.4 - 2019-09-22
+### Fixed
+* Upgraded TSProxy to 1.5 [#945](https://github.com/sitespeedio/browsertime/pull/945) see [TSProxy issue #20](https://github.com/WPO-Foundation/tsproxy/issues/20) for more details.
+* Upgraded to latest Chrome-har with extra guard if a response is missing respone data.
+
+## 6.0.3 - 2019-09-14
+### Fixed
+* New chrome-har that handles when Chrome trace misses a response.
+
+## 6.0.2 - 2019-09-14
+### Fixed
+* Fixed broken proxy setup for Firefox (and propably Chrome) [#943](https://github.com/sitespeedio/browsertime/pull/943).
+* Fixed flickering timer in the video [#944](https://github.com/sitespeedio/browsertime/pull/944).
+
+## 6.0.1 - 2019-09-12
+### Fixed
+* Updated to Chromedriver 77.0.3865.40 stable from beta version.
+* Do not log First paint as undefined when you run your tests on Safari [#941](https://github.com/sitespeedio/browsertime/pull/941)
+* Setup the browser the same way when measuring vs only navigating. This fixes the problem that you missed out on long task info if you first navigate to a URL to fill the cache and then measure the next URL [#940](https://github.com/sitespeedio/browsertime/pull/940).
+
+## 6.0.0 - 2019-09-10
+
+### Added
+
+* Limited support to run Safari on iOS and OS X. To run on iOS you need iOS 13 and Mac OS Catalina. At the moment you get Navigation Timing and Resource Timing metrics. In the future lets hope we can add more metrics [#872](https://github.com/sitespeedio/browsertime/pull/872).
+* Collect element timings for Chrome [#921](https://github.com/sitespeedio/browsertime/pull/921). All elements needs to have a unique identifier for this to work correctly.
+* Use Chromedriver 77 and Chrome 77.
+* Use [TSProxy](https://github.com/WPO-Foundation/tsproxy) to throttle the connection. You should use TSProxy when you run on Kubernetes. Use it by `--connectivity.engine tsproxy`. We used to have support years ago but it never worked good on Mac/Linux so we dropped it. But it works better now so we added it back [#891](https://github.com/sitespeedio/browsertime/pull/891).
+* Using Chrome 77 (or later) you will now get a layout shift score (in percentage), see https://web.dev/layout-instability-api. [#905](https://github.com/sitespeedio/browsertime/pull/905).
+* Get LargestContentfulPaint in Chrome 77 (or later) [#906](https://github.com/sitespeedio/browsertime/pull/906).
+* You can now add your own metrics directly from your script (or post script) using *context.result.extras*. More info coming [#917](https://github.com/sitespeedio/browsertime/pull/917)
+* There's an alternative to collect Visual Metrics using the Chrome trace log, using [SpeedLine](https://github.com/paulirish/speedline) implemented in [#876](https://github.com/sitespeedio/browsertime/pull/876). Using video give more accurate metrics (at least in our testing) but maybe it could help running on Chrome on Android and add less overhead than recording a video. You can enable it with:  `--cpu --chrome.visualMetricsUsingTrace --chrome.enableTraceScreenshots`
+
+### Changed
+* Upgraded to yargs 14.1.0 that deep merge configuration files when you extend another configuration [#938](https://github.com/sitespeedio/browsertime/pull/938)
+* We changed where the filmstrip screenshots are saved. Before it was *video/images*, now it is *filmstrip* both for VisualMetrics and SpeedLine [#876](https://github.com/sitespeedio/browsertime/pull/876).
+
+### Fixed
+* Added guard against when LCP miss out on a element [#936](https://github.com/sitespeedio/browsertime/pull/936).
+* Make sure we have that page in the HAR before we try to add meta data [#937](https://github.com/sitespeedio/browsertime/pull/937).
+* Increase margin from 4 -> 6% of for the bottom part of the screen to elimanate Chromes info bar on emulated mobile [#935](https://github.com/sitespeedio/browsertime/pull/935)
+* Categorise all mime types that has JSON as JSON for Chrome (to make it possible to store the JSON result in the HAR) [#930](https://github.com/sitespeedio/browsertime/pull/930).
+* Guard against Safaris limited PerformanceObserver [#922](https://github.com/sitespeedio/browsertime/pull/922).
+* Removed decimals from FullyLoaded metric [#923](https://github.com/sitespeedio/browsertime/pull/923).
+* Avoid using OS tmp dir (we have had people reporting permission errors) [#916](https://github.com/sitespeedio/browsertime/pull/916).
+
+### Tech
+* Updated dev dependencies and yargs, chrome-remote-interface, throttle, execa & sharp.
+
+## 5.7.3 - 2019-08-03
+### Fixed
+* Fixed bug introduced in 5.6.0 that made it impossible to set multiple cookies when using Chrome [#910](https://github.com/sitespeedio/browsertime/pull/910).
+
+## 5.7.2 - 2019-08-01
+### Fixed
+* If the trace log miss out on a navigationStart event (causing Tracium to fail) we now insert a navigationStart event [#904](https://github.com/sitespeedio/browsertime/pull/904). The missing navigationStart event started to happen more frequently in Chrome 76.
+
+## 5.7.1 - 2019-07-31
+### Fixed
+* New Chrome introduced more errors when parsing the trace log [#902](https://github.com/sitespeedio/browsertime/issues/902). Let us log better if we have problems with the trace [#903](https://github.com/sitespeedio/browsertime/pull/903).
+
+## 5.7.0 - 2019-07-30
+### Added
+* Upgraded to Chrome 76 in the Docker container and to Chromedriver 76.
+
+## 5.6.1 -  2019-07-28
+### Fixed
+* There was a bug in getting the HTML/response bodies in Chrome where we didn't waited to get the content until we moved on [#900](https://github.com/sitespeedio/browsertime/pull/900).
+
+## 5.6.0 -  2019-07-27
+### Fixed
+* Turn off visual metrics in the Docker container with `--visualMetrics false` didn't work. Fixed in [#881](https://github.com/sitespeedio/browsertime/pull/881).
+* Getting the HTML in the HAR file didn't work correctly in Chrome, fixed in [#895](https://github.com/sitespeedio/browsertime/pull/895) and reported in [#894](https://github.com/sitespeedio/browsertime/issues/894).
+* Moved all Browsertime Extension functionality for Chrome to CDP (to make this work on Android). On Desktop this should work as before:
+    * Clear cache [#885](https://github.com/sitespeedio/browsertime/pull/885) and [#887](https://github.com/sitespeedio/browsertime/pull/887)
+    * Block domains [#884](https://github.com/sitespeedio/browsertime/pull/884).
+    * Set cookie [#883](https://github.com/sitespeedio/browsertime/pull/883) (the cookie is set on the domain under test).
+    * Basic Auth [#882](https://github.com/sitespeedio/browsertime/pull/882).
+* Added more verbose log to measure time to parse the Chrome trace log using Tracium [#890](https://github.com/sitespeedio/browsertime/pull/890) to make it easier to find performance issues.
+* Bumped lodash from 4.17.11 to 4.17.15.
+* Updated dependencies: chrome-har, execa, dayjs, find-up, yargs [#892](https://github.com/sitespeedio/browsertime/pull/892)
+
+### Added
+* You can use `--chrome.includeResponseBodies all` to get JS/CSS and other text bases response bodies included in the HAR file for Chrome [#896](https://github.com/sitespeedio/browsertime/pull/896).
+
+* If you use Chrome and collect performance metrics using CDP (that is on by default) we now also collect First Meaningful Paint [#898](https://github.com/sitespeedio/browsertime/pull/898)
+
+## 5.5.0 - 2019-07-11
+### Added
+* Updated to Firefox 68 in Docker.
+
+### Fixed
+* We seen cases where Firefox returns negative values for timeToFirstInteractive, we catch that with [#880](https://github.com/sitespeedio/browsertime/pull/880).
+#882
+## 5.4.1 - 2019-07-04#883
+### Fixed
+* Better check that a request header is supplied before parsing [#875](https://github.com/sitespeedio/browsertime/pull/875).
+
+## 5.4.0 - 2019-07-04
+### Fixed
+* Better error message for the user if the config.json file is malformed [#869](https://github.com/sitespeedio/browsertime/pull/869)
+* Getting the netlog for Chrome was broken when using scripting. This fix catches an error and changes when we remove the file. If you test multiple URLs the netlog will contain all interactions for the script. The first file = first URL. The second file = first and second url. [#874](https://github.com/sitespeedio/browsertime/pull/874)
+
+### Added
+* Two new functions in scripting: `addText.byName(name)` and `addText.byClassName(className)`. See [#870](https://github.com/sitespeedio/browsertime/pull/870).
+* Upgraded to coming Selenium 4. There should be no difference for end users [#871](https://github.com/sitespeedio/browsertime/pull/871).
+
+## 5.3.1 - 2019-06-30
+### Fixed
+* Updated Tracium with another way to find start navigation.
+
+## 5.3.0 - 2019-06-29
+### Added
+* Added support for `--injectJs` using Chrome [#864](https://github.com/sitespeedio/browsertime/pull/864).
+
+### Fixed
+* Use CDP to set request headers for Chrome (instead of the Browsertime extension). This enables adding extra headers for Chrome on Android and fixes [#2520](https://github.com/sitespeedio/sitespeed.io/issues/2520). Fixed in [#867](https://github.com/sitespeedio/browsertime/pull/867).
+
+##  5.2.6 - 2019-06-15
+### Fixed
+* Catch if getting the HTML for a resource from Chrome fails [#861](https://github.com/sitespeedio/browsertime/pull/861).
+* A couple of more pixels to know if a orange screen is orange in Visual Metrics [#862](https://github.com/sitespeedio/browsertime/pull/862).
+* Bumped versions if adbkit, chrome-remote-interface & yargs [#863](https://github.com/sitespeedio/browsertime/pull/863).
+
+## 5.2.5 - 2019-06-13
+### Fixed
+* Fixed so that the tracing in Chrome ends before we start to run our JavaScript metrics (so that they aren't picked up in the trace) [#860](https://github.com/sitespeedio/browsertime/pull/860).
+
+## 5.2.4 - 2019-06-13
+### Fixed
+* Running a script that started to measure without a URL and used an alias instead missed out on starting some browser services, for example Long Tasks in Chrome was not recorded. That is fixed in [#858](https://github.com/sitespeedio/browsertime/pull/858)
+
+## 5.2.3 - 2019-06-12
+### Fixed
+* The --enableTraceScreenshots should also work under --chrome.enableTraceScreenshots.
+* Updated Tracium to catch error that happens running tests on Wikipedia.
+t,
+## 5.2.2 - 2019-06-11
+### Fixed
+* For a while we will run our own version of Tracium that doesn't throw errors if the events in the trace log doesn't follow Traciums standard [#856](https://github.com/sitespeedio/browsertime/pull/856).
+
+## 5.2.1 - 2019-06-10
+### Fixed
+* Next version of Chrome brings back the infobar that pushes down content see [upstream](https://bugs.chromium.org/p/chromium/issues/detail?id=818483). Lets remove the automated flag and test how that works [#853](https://github.com/sitespeedio/browsertime/pull/853).
+
+* Include the last 50 pixels when checking if the page is still orange, hopefully fixing the case where First Visual Change happens way too early [#854](https://github.com/sitespeedio/browsertime/pull/854).
+
+## 5.2.0 - 2019-06-07
+### Added
+* Added metric LastMeaningfulPaint that will be there when you collect `--visualElements` [848](https://github.com/sitespeedio/browsertime/pull/848).
+
+* You can get screenshots in your Chrome trace log using `--chrome.enableTraceScreenshots` [#851](https://github.com/sitespeedio/browsertime/pull/851)
+
+* Chrome 75 in the Docker container (and Chromedriver 75). Also updated Firefox to 67.0.1 [#852](https://github.com/sitespeedio/browsertime/pull/852).
+
+### Fixed
+* Fixed the missing timings in the trace log in Chrome. Or rather they where there but you couldn't see them when you drag/drop the log into devtools [#850](https://github.com/sitespeedio/browsertime/pull/850).
+
+## 5.1.3 - 2019-05-31
+### Fixed
+* Upgraded DayJS to 1.8.14
+* Use unmodified Selenium and use CDP outside of Selenium to avoid having our own modified version [#846](https://github.com/sitespeedio/browsertime/pull/846). People have had problem installing the npm package [#2483](https://github.com/sitespeedio/sitespeed.io/issues/2483) and this hopefully fixes that.
+
+## 5.1.2 - 2019-05-29
+
+### Fixed
+* Using CPU metrics on Android phones was broken since 5.0.0, fixed in [#844](https://github.com/sitespeedio/browsertime/pull/844).
+
+## 5.1.1 - 2019-05-27
+
+### Fixed
+* Getting the HTML content into your Chrome HAR included the full content object instead of just the plain text. Fixed in [#842](https://github.com/sitespeedio/browsertime/pull/842).
+
+## 5.1.0 - 2019-05-27
+
+### Added
+* Updated the Docker container to use Firefox 67.0.
+* Automatically pickup up visual mettrics for elements with the elementtiming attribute. When it land in Chrome, this will make sure you will get it both in RUM and synthetic [#841](https://github.com/sitespeedio/browsertime/pull/841)
+
+## 5.0.0 - 2019-05-16
+
+### Changed
+* Replaced [Chrome-trace](https://github.com/sitespeedio/chrome-trace) with [Tracium](https://github.com/aslushnikov/tracium) in [#816](https://github.com/sitespeedio/browsertime/pull/816/). This means we use a Chrome blessed parser that will mean less work for us within the team! Enable it with `--chrome.timeline`. It also means two changes:
+ * We skipped reporting all internal events inside of Chrome and only report events that takes more than 10 ms. We do this because it makes it easier to understand which events actually takes time and are useful.
+ * Instead of reporting: Loading, Painting, Rendering, Scripting and Other we now report the same categories as Tracium: parseHTML, styleLayout, paintCompositeRender, scriptParseCompile,  scriptEvaluation, garbageCollection and other. This gives you a little more insights of CPU time spent.
+ * We collect more trace log than before (following Lighthouse, the trace log will be larger on disk), this makes it easier for you when you want to debug problems.
+
+## Added
+* Collect CPU long tasks in Chrome using `--chrome.collectLongTasks` using the [Long Task API](https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API). For the long tasks to work, we inject JS using the *Page.addScriptToEvaluateOnNewDocument* devtools command. We collect all long tasks and related data (not so much at the moment but will get better/more useful information when browsers supports it) and count the total number of long tasks, long tasks that happens before first paint and first contentful paint. Implemented in [#821](https://github.com/sitespeedio/browsertime/pull/821) and [#825](https://github.com/sitespeedio/browsertime/pull/825).
+
+* By default a long task is >50ms. Wanna change that? Use `--minLongTaskLength` to set that yourselves (it needs to be larger than 50 ms though) [#838](https://github.com/sitespeedio/browsertime/pull/838).
+
+* Throttle the CPU using Chrome with `--chrome.CPUThrottlingRate`. Enables CPU throttling to emulate slow CPUs. Throttling rate as a slowdown factor (1 is no throttle, 2 is 2x slowdown, etc). Implemented in [#819](https://github.com/sitespeedio/browsertime/pull/819).
+
+* You can now use a .browsertime.json file as a default config json file that will be picked up automatically [#824](https://github.com/sitespeedio/browsertime/pull/824).
+
+* Include the actual HTML in the HAR file for Chrome using `--chrome.includeResponseBodies html` [#826](https://github.com/sitespeedio/browsertime/pull/826)
+
+* Use `--blockDomainsExcept` to block all domains except. Use it muliple times to have multiple domains. You can also use wildcard like *.sitespeed.io [#840](https://github.com/sitespeedio/browsertime/pull/840)
+
+* Shortcut `--cpu` to enable `--chrome.timeline` and `--chrome.collectLongTasks` for Chrome [#839](https://github.com/sitespeedio/browsertime/pull/839).
 
 ### Fixed
 * Bumped all dependencies that needed a bump [#817](https://github.com/sitespeedio/browsertime/pull/817).
+
+## 4.9.3 - 2019-05-05
+### Fixed
+* Upgraded the Docker container to use Firefox 66.0.4 that fixes the extension problems that broke getting the HAR.
 
 ## 4.9.2 - 2019-04-26
 ### Fixed
@@ -1177,7 +1493,6 @@ We have worked a lot to make Browsertime 3.0 the best version so far. Read the [
 ## version 1.0.0-beta.33 2017-04-04
 
 ### Fixed
-
 * Support legacy option for experimental.dumpChromePerflog and chrome.dumpTraceCategoriesLog from the CLI.
 * Catch all type of errors if the browsers fail to start and do a retry.
 
