@@ -4,6 +4,7 @@
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.4",
+    "@sitespeed.io/geckodriver": "0.26.0",
     "adbkit": "2.11.1",
     "btoa": "1.2.1",
     "@sitespeed.io/chromedriver": "78.0.3904-70",
@@ -37,7 +38,6 @@
   },
   "optionalDependencies": {
     "@sitespeed.io/chromedriver": "74.0.372-9.6-1",
-    "@sitespeed.io/geckodriver": "0.24.0",
     "sharp": "0.22.1"
   },
   "devDependencies": {
