@@ -6446,8 +6446,9 @@
       "integrity": "sha512-g3WxHrqSWCZHGHlSrF51VXFdjImhwvH8ZO/pryFH56Qi0cDsZfylQa/t0jCzVQFNbNvM00HfHjkDPEuarKDSWQ=="
     },
     "selenium-webdriver": {
-      "version": "https://github.com/mozilla/selenium/archive/v3.6.0-android.tar.gz",
-      "integrity": "sha512-KuXBGAHSK5C6/uH2F4QbXq+niX+p+LWqfT6wA5lwTyLb3Zts8/YUuPjDqstZ+9T0Eh8HRf++uFUyV04dYTK3jw==",
+      "version": "4.0.0-alpha.4",
+      "resolved": "https://registry.npmjs.org/selenium-webdriver/-/selenium-webdriver-4.0.0-alpha.4.tgz",
+      "integrity": "sha512-etJt20d8qInkxMAHIm5SEpPBSS+CdxVcybnxzSIB/GlWErb8pIWrArz/VA6VfUW0/6tIcokepXQ5ufvdzqqk1A==",
       "requires": {
         "jszip": "^3.1.5",
         "rimraf": "^2.6.3",
