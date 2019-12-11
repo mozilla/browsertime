@@ -4,7 +4,6 @@
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.4",
-    "@sitespeed.io/geckodriver": "0.26.0",
     "adbkit": "2.11.1",
     "btoa": "1.2.1",
     "@sitespeed.io/chromedriver": "78.0.3904-70",
@@ -30,7 +29,7 @@
     "selenium-webdriver": "4.0.0-alpha.4",
     "valid-url": "1.0.9",
     "sharp": "0.23.0",
-    "@sitespeed.io/geckodriver": "0.26.0",
+    "@sitespeed.io/geckodriver": "0.24.0",
     "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.2",
     "@cypress/xvfb": "1.2.4",
